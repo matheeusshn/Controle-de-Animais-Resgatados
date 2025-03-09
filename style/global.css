@@ -1,0 +1,65 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --primary-100: #fe9732;
+    --primary-200: #f89838;
+    --primary-500: #864C1B;
+  
+    --green-300: #bccbc2;
+    --green-400: #bfd2c3;
+  
+    --gray-50: #D8D7D0;
+    --gray-100: #BFBEB6;
+    --gray-200: #a1a0a1;
+    --gray-300: #918f91;
+    --gray-400: #848280;
+    --gray-700: #352b25;
+  
+    --white: #ffffff;
+    --white-100: #fdfdfd;
+  
+    --black-500: #343131;
+  
+    --primary-transtion: 0.2s;
+  
+    font-size: 62.5%;
+  }
+  
+  body,
+  html {
+    width: 100%;
+    height: 100%;
+  
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
+  }
+  
+  button {
+    transition: var(--primary-transtion);
+    cursor: pointer;
+  }
+  
+  button:hover {
+    filter: brightness(0.9);
+  }
+  
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  ul {
+    list-style: none
+  }
+  
+  .wrapper {
+    padding-inline: 8rem;
+  }
+  
+  .w-50 {
+    width: 50%;
+  }

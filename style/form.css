@@ -1,0 +1,128 @@
+@import url('./global.css');
+
+body {
+  position: relative;
+}
+
+.header {
+  width: 100%;
+  min-height: 30rem;
+  background-color: var(--black-500);
+
+  background-image: url('../assets/fundo2.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+form {
+  width: 100%;
+  max-width: 70rem;
+  min-height: 50rem;
+  margin-inline: auto;
+
+  background-color: var(--white);
+
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  position: absolute;
+ 
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 3rem;
+}
+
+.paragraph {
+  align-self: center;
+  text-align: center;
+  max-width: 300px;
+  color: var(--black-500);
+}
+
+form h1 {
+  align-self: center;
+  text-align: center;
+  max-width: 500px;
+}
+
+form input {
+  width: 100%;
+  min-height: 5rem;
+
+  border-radius: 10px;
+
+  padding: 1rem;
+
+  border: 1px solid var(--gray-50);
+}
+
+form textarea {
+  width: 100%;
+  min-height: 9rem;
+
+  border-radius: 10px;
+
+  padding: 1rem;
+
+  border: 1px solid var(--gray-50);
+  resize: none;
+}
+
+form select {
+  border: 1px solid var(--gray-50);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+form button {
+  width: 100%;
+  min-height: 5rem;
+  border: 0;
+  background-color: var(--primary-100);
+  border-radius: 10px;
+
+  align-items: flex-end;
+}
+
+form button p {
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.7rem;
+  color: var(--primary-500);
+}
+
+.second-fields,
+.primary-fields {
+  display: flex;
+  gap: 1rem;
+}
+
+.box-image {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.box-image #image {
+  width: 100%;
+  max-width: 100px;
+  height: 100px;
+  background-color: var(--gray-50);
+  border-radius: 10px;
+}
+
+.box-image div {
+  width: 50%;
+}
+
