@@ -21,3 +21,21 @@ FROM (
 ) AS Sub
 JOIN ONG O ON Sub.ID_ONG = O.ID_ONG
 GROUP BY O.Nome;
+
+-- Agrupa os animais pela espécie e retorna a contagem de cada.
+
+SELECT Especie, COUNT(*) AS Total_Animais
+FROM Animal
+GROUP BY Especie;
+
+-- Calcula a idade média dos animais para cada espécie.
+
+SELECT Especie, AVG(Idade) AS Media_Idade
+FROM Animal
+GROUP BY Especie;
+
+-- Exibe a quantidade de animais em cada status (Disponível, Adotado, Em Tratamento, etc.).
+
+SELECT Status, COUNT(*) AS Quantidade
+FROM Animal
+GROUP BY Status;
