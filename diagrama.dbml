@@ -1,0 +1,71 @@
+Table ONG {
+  ID_ONG int [primary key]
+  Nome varchar
+  Responsavel varchar
+  Telefone varchar
+  Endereco varchar
+  Email varchar
+}
+
+Table Animal {
+  ID_Animal int [primary key]
+  Nome_do_animal varchar
+  Especie varchar
+  Raca varchar
+  Porte varchar
+  Peso float
+  Idade int
+  Saude varchar
+  Status varchar
+  ID_ONG int [ref: > ONG.ID_ONG]
+}
+
+Table Adocao {
+  ID_Adocao int [primary key]
+  Data_Adocao date
+  Status_Adocao varchar
+  ID_Animal int [ref: > Animal.ID_Animal]
+  ID_Tutor int [ref: > Tutor.ID_Tutor]
+}
+
+Table Tutor {
+  ID_Tutor int [primary key]
+  Nome varchar
+  CPF varchar
+  Telefone varchar
+  Endereco varchar
+  Email varchar
+}
+
+Table Vacina {
+  ID_Vacina int [primary key]
+  Nome varchar
+  Data_Aplicacao date
+  Proxima_Dose date
+  ID_Animal int [ref: > Animal.ID_Animal]
+}
+
+Table Procedimento {
+  ID_Tratamento int [primary key]
+  Tipo varchar
+  Descricao text
+  Data_Inicio date
+  Data_Termino date
+  ID_Animal int [ref: > Animal.ID_Animal]
+}
+
+Table Visita_Pos_Adocao {
+  ID_Visita int [primary key]
+  Data_Visita date
+  Status_Visita varchar
+  Observacao text
+  ID_Adocao int [ref: > Adocao.ID_Adocao]
+}
+
+Table Devolucao {
+  ID_Devolucao int [primary key]
+  Data_Devolucao date
+  Motivo text
+  Observacoes text
+  ID_Adocao int [ref: > Adocao.ID_Adocao]
+}
