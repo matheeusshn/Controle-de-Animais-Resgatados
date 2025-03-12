@@ -52,3 +52,53 @@ CREATE TABLE Procedimento (
     INDEX (Tipo),
     INDEX (ID_Animal)
 );
+
+CREATE TABLE Tutor (
+    ID_Tutor INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    CPF VARCHAR(14) UNIQUE NOT NULL,
+    Telefone VARCHAR(20),
+    Endereco VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+    Email VARCHAR(255),
+    INDEX (Nome)
+);
+
+CREATE TABLE Adocao (
+    ID_Adocao INT PRIMARY KEY AUTO_INCREMENT,
+    Data_Adocao DATE NOT NULL,
+    Status_Adocao VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    ID_Animal INT NOT NULL UNIQUE,
+    ID_Tutor INT NOT NULL,
+    FOREIGN KEY (ID_Animal) REFERENCES Animal(ID_Animal),
+    FOREIGN KEY (ID_Tutor) REFERENCES Tutor(ID_Tutor),
+    INDEX (Data_Adocao),
+    INDEX (Status_Adocao),
+    INDEX (ID_Animal),
+    INDEX (ID_Tutor)
+);
+
+CREATE TABLE Visita_Pos_Adocao (
+    ID_Visita INT PRIMARY KEY AUTO_INCREMENT,
+    Data_Visita DATE NOT NULL,
+    Status_Visita VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    Observacao TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+    ID_Adocao INT NOT NULL,
+    FOREIGN KEY (ID_Adocao) REFERENCES Adocao(ID_Adocao),
+    INDEX (Data_Visita),
+    INDEX (Status_Visita),
+    INDEX (ID_Adocao)
+);
+
+CREATE TABLE Devolucao (
+    ID_Devolucao INT PRIMARY KEY AUTO_INCREMENT,
+    Data_Devolucao DATE NOT NULL,
+    Motivo TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    Observacoes TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+    ID_Adocao INT NOT NULL,
+    FOREIGN KEY (ID_Adocao) REFERENCES Adocao(ID_Adocao),
+    INDEX (Data_Devolucao),
+    INDEX (ID_Adocao)
+);
+
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
