@@ -34,5 +34,5 @@ SHOW DATABASES;
 ### Se o banco estiver na lista, prossiga.
 Agora, selecione o banco:
 
-```sql``
+```sql```
 USE sistemaong;
