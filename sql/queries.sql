@@ -45,6 +45,7 @@ GROUP BY Especie;
 SELECT Status, COUNT(*) AS Quantidade
 FROM Animal
 GROUP BY Status;
+
 -- Dashboard das Vacinas
 
 -- Agrupa as vacinas pela data de aplicação (mês/ano) e conta quantas foram aplicadas em cada período.
@@ -145,16 +146,6 @@ FROM Adocao
 WHERE Status_Adocao = 'Em Andamento';
 
 -- Dashboard de Visitas Pós-Adoção e Devoluções
-
--- Retorna a contagem de visitas pós-adoção e o intervalo médio de dias entre a adoção e a visita, agrupadas pelo status da visita.
-
-SELECT 
-    V.Status_Visita, 
-    COUNT(*) AS Total_Visitas,
-    ROUND(AVG(DATEDIFF(V.Data_Visita, A.Data_Adocao)), 2) AS Media_Dias_Adocao_Visita
-FROM Visita_Pos_Adocao V
-JOIN Adocao A ON V.ID_Adocao = A.ID_Adocao
-GROUP BY V.Status_Visita;
 
 -- Contagem de animais disponíveis para adoção e seus status, agrupados por ONG
 
