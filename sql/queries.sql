@@ -98,3 +98,85 @@ SELECT Tipo, ROUND(AVG(DATEDIFF(Data_Termino, Data_Inicio)), 2) AS Media_Duracao
 FROM Procedimento
 WHERE Data_Termino IS NOT NULL
 GROUP BY Tipo;
+
+-- Dashboard dos Tutores
+
+-- Exibe cada tutor e a quantidade de adoções associadas a ele.
+
+SELECT T.Nome AS Tutor, COUNT(*) AS Total_Adocoes
+FROM Tutor T
+JOIN Adocao A ON T.ID_Tutor = A.ID_Tutor
+GROUP BY T.Nome;
+
+-- Calcula a idade média dos animais adotados por cada tutor.
+
+SELECT T.Nome AS Tutor, ROUND(AVG(An.Idade), 2) AS Media_Idade_Animais
+FROM Tutor T
+JOIN Adocao A ON T.ID_Tutor = A.ID_Tutor
+JOIN Animal An ON A.ID_Animal = An.ID_Animal
+GROUP BY T.Nome;
+
+-- Exibe os tutores que tiveram devoluções e quantas ocorreram, considerando a ligação entre Adocao e Devolucao.
+
+SELECT T.Nome AS Tutor, COUNT(D.ID_Devolucao) AS Total_Devolucoes
+FROM Tutor T
+JOIN Adocao A ON T.ID_Tutor = A.ID_Tutor
+JOIN Devolucao D ON A.ID_Adocao = D.ID_Adocao
+GROUP BY T.Nome;
+
+-- Dashboard das Adoções
+
+-- Agrupa as adoções pelo status (Concluída, Em Andamento, etc.) e retorna a contagem de cada.
+
+SELECT Status_Adocao, COUNT(*) AS Total_Adocoes
+FROM Adocao
+GROUP BY Status_Adocao;
+
+-- Agrupa as adoções pela data (mês/ano) e mostra quantas foram realizadas em cada período.
+
+SELECT DATE_FORMAT(Data_Adocao, '%Y-%m') AS Mes, COUNT(*) AS Total_Adocoes
+FROM Adocao
+GROUP BY Mes;
+
+-- Calcula a média de dias entre a data de adoção e a data atual para as adoções que ainda estão em andamento.
+
+SELECT ROUND(AVG(DATEDIFF(CURDATE(), Data_Adocao)), 2) AS Media_Dias_Aguardando
+FROM Adocao
+WHERE Status_Adocao = 'Em Andamento';
+
+-- Dashboard de Visitas Pós-Adoção e Devoluções
+
+-- Retorna a contagem de visitas pós-adoção e o intervalo médio de dias entre a adoção e a visita, agrupadas pelo status da visita.
+
+SELECT 
+    V.Status_Visita, 
+    COUNT(*) AS Total_Visitas,
+    ROUND(AVG(DATEDIFF(V.Data_Visita, A.Data_Adocao)), 2) AS Media_Dias_Adocao_Visita
+FROM Visita_Pos_Adocao V
+JOIN Adocao A ON V.ID_Adocao = A.ID_Adocao
+GROUP BY V.Status_Visita;
+
+-- Contagem de animais disponíveis para adoção e seus status, agrupados por ONG
+
+SELECT 
+    O.Nome AS ONG, 
+    COUNT(*) AS Total_Animais, 
+    SUM(CASE WHEN A.Status = 'Disponível' THEN 1 ELSE 0 END) AS Animais_Disponiveis,
+    SUM(CASE WHEN A.Status = 'Adotado' THEN 1 ELSE 0 END) AS Animais_Adotados,
+    SUM(CASE WHEN A.Status = 'Em Tratamento' THEN 1 ELSE 0 END) AS Animais_Em_Tratamento
+FROM Animal A
+JOIN ONG O ON A.ID_ONG = O.ID_ONG
+GROUP BY O.Nome;
+
+-- Calcula o tempo médio que o animal ficou com o tutor antes de ser devolvido.
+SELECT 
+    COUNT(*) AS Total_Devolucoes, 
+    ROUND(AVG(DATEDIFF(D.Data_Devolucao, A.Data_Adocao)), 2) AS Media_Dias_Ate_Devolucao
+FROM Devolucao D
+JOIN Adocao A ON D.ID_Adocao = A.ID_Adocao;
+
+-- Agrupa as devoluções pelo motivo e retorna a quantidade de cada motivo, possibilitando identificar os principais motivos de devolução.
+
+SELECT Motivo, COUNT(*) AS Total_Devolucoes
+FROM Devolucao
+GROUP BY Motivo;
